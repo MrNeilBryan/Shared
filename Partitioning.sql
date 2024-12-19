@@ -160,7 +160,12 @@ GO
 --------------------------------------------------------------------------------------------
 -- Show partitions
 -------------------------------------------------------------------------------------------
-SELECT $PARTITION.pfMonths([Date]) PartitionID, * FROM dbo.tbl_Test_Partition ORDER BY [Date] 
+WITH _01 AS (SELECT  $PARTITION.pfMonths([Date]) PartitionID, 
+                     COUNT(1) AS c, 
+                     DATEPART(YEAR,[Date])*100 + DATEPART(MONTH,[Date]) AS YYYYMM  
+             FROM dbo.tbl_Test_Partition 
+             GROUP BY [Date] )
+SELECT PartitionID, SUM(c) AS TotalRecords, YYYYMM FROM _01 GROUP BY PartitionID,YYYYMM ORDER BY PartitionID;
 GO
 
 --------------------------------------------------------------------------------------------
