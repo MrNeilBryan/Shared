@@ -1,2 +1,2 @@
 # Shared
-Shared Code
+Partitioning.sql - This script creates a database with two tables: a partitioned table (partitioned by month) and a non-partitioned table. Both tables are populated with the same 10 million records. The script then selects data for a specific month, capturing statistics and revealing the number of pages involved in each select operation. Additionally, the script demonstrates how to delete a partition to remove a month's worth of data from the partitioned table, and how to move a month's worth of data from the partitioned table to an archive table.
