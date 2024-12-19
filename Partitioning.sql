@@ -117,9 +117,8 @@ GO
 --------------------------------------------------------------------------------------------
 DECLARE @i INT = 1 ;
 DECLARE @startDate AS DATE = '20130101'; 
-DECLARE @EndDate AS DATE = '20231231'; 
 DECLARE @DT DATE 
-WHILE (@i <= 10000000) 
+WHILE (@i <= 10000000) -- Amend as required
 BEGIN
         SET @DT = DATEADD(DAY, RAND(CHECKSUM(NEWID()))* (1+DATEDIFF (DAY, @startDate, @EndDate)) , @StartDate) ;
         INSERT dbo.tbl_Test_Non_Partition ([Date], [AccRef], [Amount]) SELECT @DT, CAST (@I AS NVARCHAR (256)), 
